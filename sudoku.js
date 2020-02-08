@@ -18,11 +18,7 @@ function isValid(board, row, col, k) {
     const m = 3 * Math.floor(row / 3) + Math.floor(z / 3);
     const n = 3 * Math.floor(col / 3) + (z % 3);
     if (board[row][z] == k || board[z][col] == k || board[m][n] == k) {
-      // warunek sprawdzajacy dla kazdego pola z
-      // 1. rzędu
-      // 2. kolumny
-      // 3. kwadratu 9x9
-      // czy podana wartość zmiennej k wsytępuje na którym koleik z pol występujacym w 1, 2 i 3.
+      // warunek sprawdzajacy dla kazdego pola z rzedu kolumny i kwadratu 3x3
       return false; // jesli wartosc zmiennej k się pokrywa, funckja zwraca false i kolejna wartosc k jest sprawdzana
     }
   }
@@ -40,19 +36,7 @@ function sodokoSolver(data) {
             // po wstawieniu w pole liczby funkcja zatrzymuje się na iteracjach i, j opisujacych
             // współrzędne tego pola oraz iteracji k równej znalezionej liczbie.
 
-            // Następuje incepcja. - funkcja odpalana w funckji. W zamarzniętej funkcji uruchamiana
-            // zostaje kolejna funkcja która szukać będzie od początku pustego pola - itearcja aaczynają się od początku
-            // w kolejne puste pole wstawia kolejną liczbę zatrzymując się na iteracjach i, j rownych temu polu
-            // oraz k rownej znalezionej liczbie. I tak dla kazdego pustego pola odpalają się kolejne
-            // instancje funkcji do momentu wypelnienia wszystkich pól (funkcja przeiteruje i, j do konca
-            // nie przejdzie warunku data[i][j] == "." zwróci 'true' i zacznie zamykac pokoleji swoje zamrozone instancje zwracajace true)
-            // , lub do momentu trafienia na pole
-            // gdzie zadna liczba nie pasuje. wtedy przeiteruje do konca zmienna k i warunek z funckją(isValid) nie zostaje spelniony.
-            // nasza funkcja sodokoSolver zwróci więc false co spowoduje wstawienie w miescje poprzednio
-            // znalezionej liczby pustego miejsca i podjecie kolejnej proby znalezienia liczyby WYŻSZEJ niz
-            // wstawiona poprzednio (dalsza iteracja zmiennej k). W razie nie znalezienia odpowiedniej liczby mechanizm
-            // się powtórzy i cofnie nas o kolejny krok do tyłu. I tak az do momentu kiedy wszystko bedzie ok. Wtedy wszystko
-            // znowu ruszy dalej.
+            // odpalamy kolejna funkcje dla kolejnego pola
             if (sodokoSolver(data)) {
               return true; //zwraca true zamykając instancję (liczba w polu znaleziona i jest dobrze)
             } else {
